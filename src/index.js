@@ -1,37 +1,87 @@
-/* LordJiriX 2025 */
+/*
+© LordJiriX 2025
+--- under MIT ---
+*/
+const VERSION = "1.0.0";
+function getVersion() {
+      return (VERSION);
+}
 function createElm(html) {
-      const template = document.createElement("template");
-      template.innerHTML = html.trim();
-      return template.content.firstChild;
-    }
+  const template = document.createElement("template");
+  template.innerHTML = html.trim();
+  return template.content.firstChild;
+}
 
-    function render(elm, props = {}, containerId = "app") {
+
+function render(elm, props = {}, containerId = "app") {
   const container = document.getElementById(containerId);
+  if (!container) {
+    throw new Error(`Container with ID "${containerId}" not found.`);
+  }
+  container.appendChild(elm);
+  return elm;
+}
 
+
+function el(tag, props = {}, children = []) {
+  const element = document.createElement(tag);
+
+  
+  if (typeof children === "string") {
+    element.textContent = children;
+  } else if (Array.isArray(children)) {
+    for (const child of children) {
+      element.appendChild(
+        typeof child === "string" ? document.createTextNode(child) : child
+      );
+    }
+  } else if (children instanceof Node) {
+    element.appendChild(children);
+  }
+
+  
   for (const [key, value] of Object.entries(props)) {
-    if (key === "style") {
-      if (typeof value === "string") {
-        elm.setAttribute("style", value);
-      } else if (typeof value === "object") {
-        for (const [prop, val] of Object.entries(value)) {
-          elm.style[prop] = val;
-        }
-      }
-    }
+    if (key === "style" && typeof value === "object") {
+      Object.assign(element.style, value);
+    } 
     else if (key.startsWith("on") && typeof value === "function") {
-      elm.addEventListener(key.substring(2).toLowerCase(), value);
-    }
+      element.addEventListener(key.substring(2).toLowerCase(), value);
+    } 
     else if (key.startsWith("data-")) {
-      elm.setAttribute(key, value);
-    }
+      element.setAttribute(key, value);
+    } 
     else if (["value", "checked", "disabled", "src", "href", "alt", "title"].includes(key)) {
-      elm[key] = value;
-    }
+      element[key] = value;
+    } 
+    else if (key === "text") {
+      element.textContent = value;
+    } 
     else {
-      elm.setAttribute(key, value);
+      element.setAttribute(key, value);
     }
   }
 
-  container.appendChild(elm);
-  return elm;
-   }
+  
+  if (tag === "img" && props.src) {
+    element.loading = "lazy";
+    if (props.onLoad || props.onError) {
+      element.addEventListener("load", (e) => props.onLoad?.(e, element));
+      element.addEventListener("error", (e) => props.onError?.(e, element));
+    }
+  }
+
+  return element;
+}
+
+
+function setGlobalStyles(cssText) {
+  let styleTag = document.getElementById("__global_styles__");
+
+  if (!styleTag) {
+    styleTag = document.createElement("style");
+    styleTag.id = "__global_styles__";
+    document.head.appendChild(styleTag);
+  }
+
+  styleTag.textContent = cssText;
+}
