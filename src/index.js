@@ -3,6 +3,11 @@
 --- under MIT ---
 */
 const VERSION = "1.0.0";
+const HOMEPAGE = "https://github.com/LordJiriX/Parkled.js";
+
+function getHomePage() {
+      return (HOMEPAGE);
+}
 function getVersion() {
       return (VERSION);
 }
