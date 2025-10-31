@@ -1,4 +1,7 @@
 # Parkled.js
-A JavaScript lib inspired by React but for browser JavaScript
+A JavaScript lib inspired by React but for browser JavaScript, but not work.
 ### 🛑 Waring
-__Parkled.js is alfa__
+Parkled.js is alfa
+
+## Example 
+__comming soon__
