@@ -1,7 +1,24 @@
-# Parkled.js
-A JavaScript lib inspired by React but for browser JavaScript, but not work.
-### 🛑 Waring
-Parkled.js is alfa
+# DOM Utility Functions
 
-## Example 
-__comming soon__
+A small collection of lightweight JavaScript utility functions to simplify DOM creation, rendering, and styling — without any dependencies.
+
+## 🚀 Features
+
+- 🧩 **`createElm(html)`** – Create a DOM element from an HTML string.  
+- 🎨 **`el(tag, props, children)`** – Build DOM elements programmatically.  
+- 🪄 **`render(elm, props, containerId)`** – Render elements into a specific container.  
+- 🧱 **`setGlobalStyles(cssText)`** – Inject global CSS styles into the document.
+
+Perfect for lightweight projects, small components, or environments where you don’t need a full framework.
+
+---
+
+## 📦 Installation
+
+Simply copy the functions into your project html files.
+
+```html
+<script src="path/to/dom-utils.js"></script>
+```
+README.md by AI
+
