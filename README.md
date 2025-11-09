@@ -18,7 +18,7 @@ Perfect for lightweight projects, small components, or environments where you do
 Simply copy the functions into your project html files.
 
 ```html
-<script src="path/to/dom-utils.js"></script>
+<script src="https://raw.githubusercontent.com/LordJiriX/Parkled.js/refs/heads/main/src/index.js"></script>
 ```
 README.md by AI
 
